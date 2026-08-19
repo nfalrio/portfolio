@@ -10,7 +10,36 @@ export default function BackToTop() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  const scrollTop = () => {
+    // Initiate smooth scroll
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+
+    let lastScrollY = window.scrollY;
+    let stableFrames = 0;
+
+    const checkScroll = () => {
+      // Reached top successfully
+      if (window.scrollY === 0) return;
+
+      if (window.scrollY === lastScrollY) {
+        stableFrames++;
+      } else {
+        stableFrames = 0;
+        lastScrollY = window.scrollY;
+      }
+
+      // If scrollY is stuck (stable for 5 frames) but hasn't reached 0, force snap
+      if (stableFrames >= 5) {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        return;
+      }
+
+      requestAnimationFrame(checkScroll);
+    };
+
+    // Start polling next frame
+    requestAnimationFrame(checkScroll);
+  };
 
   return (
     <AnimatePresence>

@@ -242,7 +242,7 @@ export default function Hero() {
         position: 'relative',
         height: 'auto',
         minHeight: '100vh',
-        overflowX: 'hidden', /* Bulletproof horizontal scroll lock */
+        overflowX: 'clip', /* Bulletproof horizontal scroll lock */
         overflowY: 'visible', /* Allow content to push down naturally */
         display: 'flex',
         alignItems: 'center',
@@ -567,7 +567,7 @@ export default function Hero() {
           .hero__content-wrapper {
             flex-direction: column !important;
             justify-content: flex-start !important; /* Prevents top overflow */
-            padding-top: calc(var(--navbar-height) + 2rem) !important;
+            padding-top: calc(var(--navbar-height) + 1rem) !important;
             height: auto !important;
             min-height: 100vh !important;
           }
