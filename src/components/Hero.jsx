@@ -295,11 +295,15 @@ export default function Hero() {
             flexDirection: 'column',
             pointerEvents: 'auto',
             paddingTop: 'var(--navbar-height)',
-            position: 'relative', // Required for zIndex to take effect
-            zIndex: 20, // Sit ABOVE the expanded canvas so buttons remain clickable
+            position: 'relative',
+            zIndex: 20,
           }}
         >
+          {/* =========================================
+              DESKTOP CONTENT (Hidden on Mobile)
+             ========================================= */}
           <motion.h1 
+            className="desktop-only"
             variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }}
             style={{
               fontFamily: 'var(--font-sans)',
@@ -308,34 +312,13 @@ export default function Hero() {
               lineHeight: 1.05,
               letterSpacing: '0.02em',
               color: 'var(--text-primary)',
-              marginBottom: '3.5rem', // Significantly increased gap between title and name
+              marginBottom: '3.5rem',
             }}>
             MY<br />PORTFOLIO
           </motion.h1>
 
-          {/* Mobile Only Static Profile Photo (Option A: Above Name) */}
-          <motion.div
-            className="hero__mobile-photo"
-            variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }}
-            style={{
-              display: 'none', // Hidden on desktop, shown via CSS on mobile
-              width: '160px',
-              height: '160px',
-              borderRadius: '50%',
-              overflow: 'hidden',
-              margin: '0 auto 1.5rem auto', // Centered with bottom margin
-              border: '3px solid var(--accent)', // Gold border to match badges
-              boxShadow: '0 8px 24px rgba(217, 164, 65, 0.15)', // Matching gold shadow
-            }}
-          >
-            <img 
-              src="/img/profil.jpeg" 
-              alt="Muhammad Naufal Rio Ramadhan"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          </motion.div>
-
           <motion.p 
+            className="desktop-only"
             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }}
             style={{
               fontFamily: 'var(--font-sans)',
@@ -348,7 +331,7 @@ export default function Hero() {
           </motion.p>
 
           <motion.div 
-            className="hero__tags"
+            className="hero__tags desktop-only"
             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }}
             style={{
               display: 'flex',
@@ -362,11 +345,11 @@ export default function Hero() {
                 fontSize: '0.75rem',
                 letterSpacing: '0.5px',
                 fontWeight: 600,
-                color: '#FFFFFF', // Changed to pure white as requested to test contrast
-                backgroundColor: 'var(--accent)', // Solid accent color instead of white
-                padding: '0.4rem 0.8rem', // Slightly adjusted padding for solid block
+                color: '#FFFFFF',
+                backgroundColor: 'var(--accent)',
+                padding: '0.4rem 0.8rem',
                 borderRadius: '6px',
-                boxShadow: '0 2px 8px var(--accent-soft)', // Subtle glow matching the solid color
+                boxShadow: '0 2px 8px var(--accent-soft)',
               }}>
                 {tag}
               </span>
@@ -374,11 +357,12 @@ export default function Hero() {
           </motion.div>
 
           <motion.p 
+            className="desktop-only"
             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }}
             style={{
               fontSize: '0.95rem',
               lineHeight: 1.7,
-              color: 'var(--text-primary)', // Solid primary text, no opacity, for maximum readability in both modes
+              color: 'var(--text-primary)',
               marginBottom: '2rem',
               maxWidth: '460px',
             }}>
@@ -387,7 +371,7 @@ export default function Hero() {
           </motion.p>
 
           <motion.div 
-            className="hero__cta-container"
+            className="hero__cta-container desktop-only"
             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }}
             style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
             <a
@@ -421,6 +405,76 @@ export default function Hero() {
               View CV
             </a>
           </motion.div>
+
+          {/* =========================================
+              MOBILE CONTENT (Neo-Brutalist Layout)
+             ========================================= */}
+          <motion.div
+            className="mobile-only hero__brutalist-photo-wrap"
+            variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.6 } } }}
+          >
+            {/* Matahari gerak di belakang (Geometric Asterisk matching the reference) */}
+            <svg 
+              className="hero__brutalist-sun"
+              viewBox="0 0 100 100" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path 
+                d="M50 5 L50 95 M5 50 L95 50 M18 18 L82 82 M18 82 L82 18" 
+                stroke="var(--accent)" 
+                strokeWidth="6" 
+                strokeLinecap="round" 
+              />
+            </svg>
+
+            <img 
+              src="/img/profil.jpeg" 
+              alt="Muhammad Naufal Rio Ramadhan"
+              className="hero__brutalist-img"
+            />
+          </motion.div>
+
+          <motion.p 
+            className="mobile-only hero__halo-saya"
+            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
+          >
+            PORTFOLIO
+          </motion.p>
+
+          <motion.h2 
+            className="mobile-only hero__name-mobile"
+            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
+          >
+            Muhammad Naufal<br/>Rio Ramadhan
+          </motion.h2>
+
+          <motion.p 
+            className="mobile-only hero__role-mobile"
+            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
+          >
+            Data Analyst, Web Development, & Mathematics Graduate
+          </motion.p>
+
+          <motion.p 
+            className="mobile-only hero__desc-mobile"
+            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
+          >
+            Mathematics graduate passionate about data analysis and web development. 
+            Turning data into meaningful insights and building practical digital solutions.
+          </motion.p>
+
+          <motion.div 
+            className="mobile-only hero__cta-mobile-wrap"
+            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
+          >
+            <a href="#tentang" className="hero__cta-mobile">
+              View My Portfolio <span aria-hidden="true">→</span>
+            </a>
+            <a href="/cv/cv-naufal-rio-ramadhan.pdf" target="_blank" rel="noopener noreferrer" className="hero__cta-mobile hero__cta-mobile--secondary">
+              View CV
+            </a>
+          </motion.div>
         </motion.div>
 
         {/* Right Column: Lanyard */}
@@ -450,6 +504,16 @@ export default function Hero() {
       </div>
 
       <style>{`
+        .desktop-only {
+          display: block;
+        }
+        div.desktop-only {
+          display: flex;
+        }
+        .mobile-only {
+          display: none !important;
+        }
+
         .hero__cta {
           position: relative;
           overflow: hidden;
@@ -481,11 +545,19 @@ export default function Hero() {
           background-color: var(--bg-elevated) !important;
           box-shadow: 0 4px 12px rgba(217, 164, 65, 0.1);
         }
-        /* ── Tablet (<=900px) ── */
+
+        /* ── Tablet & Mobile (<=900px) ── */
         @media (max-width: 900px) {
-          .hero__mobile-photo {
+          .desktop-only {
+            display: none !important;
+          }
+          .mobile-only {
+            display: flex !important;
+          }
+          p.mobile-only, h2.mobile-only, div.hero__brutalist-photo-wrap {
             display: block !important;
           }
+
           .hero__lanyard {
             display: none !important; /* Hide heavy 3D scene on mobile */
           }
@@ -494,41 +566,141 @@ export default function Hero() {
           }
           .hero__content-wrapper {
             flex-direction: column !important;
-            justify-content: flex-start !important; /* Prevents top overflow on short screens */
-            padding-top: calc(var(--navbar-height) + 2rem) !important; /* Clear navbar with extra breathing room */
+            justify-content: flex-start !important; /* Prevents top overflow */
+            padding-top: calc(var(--navbar-height) + 2rem) !important;
             height: auto !important;
             min-height: 100vh !important;
           }
           .hero__text {
             width: 100% !important;
-            align-items: center !important;
-            text-align: center !important;
-            padding: 0 1.5rem !important; /* Top padding is handled by the wrapper */
+            align-items: flex-start !important; /* Left aligned per brutalist spec */
+            text-align: left !important;
+            padding: 0 1.5rem !important; 
             order: 1;
-            margin-bottom: 2rem;
+            margin-bottom: 4rem;
           }
-          .hero__tags, .hero__cta-container {
-            justify-content: center !important;
+          
+          /* Brutalist Photo Styling */
+          .hero__brutalist-photo-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 360px;
+            margin: 0 0 3rem 0; /* Space below photo */
+            cursor: pointer;
+          }
+          
+          .hero__brutalist-sun {
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 100px;
+            height: 100px;
+            z-index: 0;
+            animation: rotateSun 12s linear infinite;
+            opacity: 0.9;
+          }
+          @keyframes rotateSun {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+
+          .hero__brutalist-img {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            aspect-ratio: 1 / 1.1;
+            object-fit: cover;
+            border-radius: 24px 24px 24px 4px; /* Brutalist sharp corner */
+            box-shadow: 12px 12px 0px var(--accent); /* Hard offset shadow */
+            transform: rotate(-2deg); /* Dynamic tilt */
+            border: 2px solid var(--border); /* Optional subtle boundary */
+            background-color: var(--bg-surface);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+          }
+          .hero__brutalist-photo-wrap:hover .hero__brutalist-img {
+            transform: rotate(0deg) scale(1.02);
+            box-shadow: 16px 16px 0px var(--accent);
+          }
+
+          /* Mobile Typography */
+          .hero__halo-saya {
+            font-size: 0.875rem;
+            font-family: var(--font-mono);
+            color: var(--accent);
+            letter-spacing: 0.25em; /* Premium spacing */
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+          }
+          .hero__name-mobile {
+            font-size: 2.5rem;
+            font-family: var(--font-sans);
+            font-weight: 800;
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+          }
+          .hero__role-mobile {
+            font-size: 1rem;
+            font-weight: 700; /* Bold */
+            color: var(--text-primary); /* Brighter contrast */
+            margin-bottom: 0.5rem;
+          }
+          .hero__desc-mobile {
+            font-size: 0.95rem;
+            color: var(--text-secondary); /* Grey text */
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            max-width: 90%;
+          }
+
+          /* Mobile CTA Container */
+          .hero__cta-mobile-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+          }
+          .hero__cta-mobile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--bg-primary); /* Dark text on gold */
+            background: var(--accent);
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.5); /* Hard button shadow */
+            border: 2px solid var(--accent);
+          }
+          .hero__cta-mobile--secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.3);
+          }
+          .hero__cta-mobile:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.5);
           }
         }
-        /* ── Mobile (<=768px) ── */
-        @media (max-width: 768px) {
+
+        /* ── Smaller Mobile (<=480px) ── */
+        @media (max-width: 480px) {
+          .hero__name-mobile {
+            font-size: 2.25rem !important;
+          }
+          .hero__brutalist-photo-wrap {
+            max-width: 300px;
+            margin-bottom: 2.5rem;
+          }
           .hero__text {
             padding: 0 1.25rem !important;
-          }
-        }
-        @media (max-width: 480px) {
-          .hero__text h1 { 
-            font-size: 2.75rem !important; 
-            margin-bottom: 2rem !important; 
-          }
-          .hero__mobile-photo {
-            width: 130px !important;
-            height: 130px !important;
-            margin-bottom: 1rem !important;
-          }
-          .hero__text p, .hero__tags {
-            margin-bottom: 1rem !important;
           }
         }
       `}</style>
